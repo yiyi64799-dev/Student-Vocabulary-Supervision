@@ -1,0 +1,11 @@
+<view class="page">
+  <view class="join-area"><button class="button-secondary" bindtap="toggleJoin">输入邀请码加入小组</button>
+    <view wx:if="{{showJoin}}" class="card stack"><view class="subtitle">加入他人小组后，你在该组的身份是学习成员。</view><input class="field" maxlength="6" placeholder="输入 6 位小组邀请码" value="{{code}}" bindinput="onCode"/><button class="button-primary" loading="{{joining}}" disabled="{{joining}}" bindtap="join">加入小组</button></view>
+  </view>
+  <view class="section-title">全部小组</view>
+  <loading-state wx:if="{{state === 'loading'}}"/>
+  <empty-state wx:elif="{{state === 'empty'}}" title="暂无小组"/>
+  <view wx:elif="{{state === 'error'}}" class="error" bindtap="load">加载失败，点击重试</view>
+  <view wx:else><view wx:for="{{groups}}" wx:key="_id" class="card row-between" data-id="{{item._id}}" bindtap="open"><view><view class="card-title">{{item.name}}</view><view class="subtitle">{{item.description || '暂无简介'}}</view></view><view class="tag">{{item.role === 'owner' ? '我管理的' : '我加入的'}}</view></view></view>
+  <view class="safe-bottom"/>
+</view>

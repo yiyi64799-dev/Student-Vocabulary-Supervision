@@ -1,0 +1,2 @@
+.practice{min-height:calc(100vh - 64rpx);display:flex;flex-direction:column;justify-content:space-between}.question{text-align:center}.prompt{font-size:52rpx;font-weight:650}.answer{margin-top:60rpx;padding:28rpx;border-bottom:4rpx solid #176b4d;font-size:48rpx}.controls button{flex:1;margin:0}.done{text-align:center;display:flex;flex-direction:column;gap:24rpx}
+

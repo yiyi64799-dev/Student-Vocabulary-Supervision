@@ -1,0 +1,16 @@
+<view class="page dashboard">
+  <view class="welcome row-between"><view><view class="eyebrow">{{preview ? 'STUDENT VIEW / 学生视角' : 'TEACHING / 高中英语'}}</view><view class="greeting">{{preview ? '你好，同学' : '你好，' + nickname}}</view></view><button class="profile-entry" bindtap="openProfile">我</button></view>
+  <view wx:if="{{preview}}" class="preview-banner">教师预览 · 以下是您发布的任务，不代表任何学生的真实进度。体验不会写入成绩或排行榜。</view>
+  <view class="focus-card"><view class="focus-copy"><view class="focus-kicker">{{preview ? '每天一点，积累看得见' : '教有方向，学有反馈'}}</view><view class="teacher-title">{{preview ? '把单词记住，把英语学扎实。' : '布置好任务，关注每一份进步。'}}</view><view class="focus-note">{{preview ? '词卡记忆 → 独立默写 → 错词复习' : '创建小组 → 发布任务 → 查看完成情况与错词'}}</view></view></view>
+  <view class="teacher-actions"><button class="button-secondary" bindtap="togglePreview">{{preview ? '退出预览，返回教学工作台' : '预览学生首页与学习流程'}}</button><button wx:if="{{!preview}}" class="button-primary" bindtap="toggleCreate">＋ 创建学习小组</button></view>
+  <view wx:if="{{showCreate && !preview}}" class="card stack form-card"><view class="card-title">创建学习小组</view><label><text class="label">小组名称</text><input class="field" maxlength="30" placeholder="例如：高一（3）班英语" value="{{name}}" bindinput="onName"/></label><label><text class="label">小组简介（选填）</text><textarea class="field" maxlength="100" placeholder="说明学习安排，最多 100 字" value="{{description}}" bindinput="onDescription"/></label><button class="button-primary" loading="{{creating}}" disabled="{{creating}}" bindtap="createGroup">确认创建</button></view>
+  <loading-state wx:if="{{state === 'loading'}}"/>
+  <view wx:elif="{{state === 'error'}}" class="card"><view>暂时无法加载教学数据</view><button class="button-secondary" bindtap="load">重新加载</button></view>
+  <block wx:else>
+    <block wx:if="{{!preview}}"><view class="row-between section-title"><text>我管理的小组</text><text class="more" bindtap="openGroups">全部小组 ›</text></view><empty-state wx:if="{{!groups.length}}" title="创建第一个学习小组" description="创建后将小组邀请码交给学生即可"/><view wx:for="{{groups}}" wx:key="_id" class="card group-card" data-id="{{item._id}}" bindtap="openGroup"><view class="group-icon">Aa</view><view><view class="card-title">{{item.name}}</view><view class="subtitle">{{item.memberCount}} 位学习成员 · 管理任务与成绩 →</view></view></view></block>
+    <view class="section-title">{{preview ? '我的学习 · 预览' : '教学任务'}}</view><view wx:if="{{tasksError}}" class="partial-error" bindtap="load">部分任务加载失败，点击重试</view>
+    <empty-state wx:if="{{preview ? !previewTasks.length : !tasks.length}}" title="暂无任务" description="在小组内创建并发布任务后，即可预览学习流程"/>
+    <view wx:for="{{preview ? previewTasks : tasks}}" wx:key="_id" class="card task-card" data-id="{{item._id}}" bindtap="openTask"><view class="tag">{{preview ? '体验任务 · 不计成绩' : item.statusLabel}}</view><view class="task-source">{{item.groupName}}</view><view class="task-title">{{item.title}}</view><view class="task-detail">{{item.wordCount}} 个单词 · 截止 {{item.deadlineLabel}}</view><view class="task-action">{{preview ? '体验学生学习 →' : '管理任务 / 查看完成情况 →'}}</view></view>
+    <view class="list-note">展示已加载的任务；教师不计入本组学习统计。</view>
+  </block><view class="safe-bottom"/>
+</view>

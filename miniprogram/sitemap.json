@@ -1,0 +1,4 @@
+{
+  "desc": "V1 页面均不允许微信索引",
+  "rules": [{ "action": "disallow", "page": "*" }]
+}

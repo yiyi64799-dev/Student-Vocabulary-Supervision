@@ -1,0 +1,2 @@
+.small{font-size:40rpx}.result{text-align:center;display:flex;flex-direction:column;gap:20rpx}
+

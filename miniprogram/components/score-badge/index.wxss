@@ -1,0 +1,1 @@
+.badge{display:inline-flex;align-items:baseline;gap:6rpx;color:#176b4d}.score{font-size:56rpx;font-weight:750}.unit{font-size:24rpx}.overdue{margin-left:10rpx;padding:4rpx 10rpx;border-radius:999rpx;background:#fff0d8;color:#9c6411;font-size:22rpx}

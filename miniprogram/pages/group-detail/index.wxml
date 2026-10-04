@@ -1,0 +1,14 @@
+<view class="page">
+  <loading-state wx:if="{{state === 'loading'}}"/>
+  <view wx:elif="{{state === 'error'}}" class="card"><view class="card-title">暂时无法加载小组</view><view class="subtitle">检查网络后重试，已保存的任务不会受到影响。</view><button class="button-secondary" bindtap="load">重新加载</button></view>
+  <view wx:else>
+    <view class="group-hero"><view class="group-eyebrow">LEARN TOGETHER / 共同进步</view><view class="row-between"><view class="title small">{{group.name}}</view><view class="role-label">{{group.myRole === 'owner' ? '我管理的小组' : '我加入的小组'}}</view></view><view class="group-description">{{group.description || '在这里，一起把每天的单词学扎实。'}}</view><view class="group-count">{{group.memberCount}} 位学习成员</view><view wx:if="{{group.myRole === 'owner'}}" class="invite"><view><text class="invite-caption">邀请码 · 点击复制</text><view class="code" bindtap="copyInvite">{{group.inviteCode}}</view></view><button size="mini" class="button-secondary" bindtap="regenerateInvite">重新生成</button></view></view>
+    <view class="row owner-actions"><button class="button-secondary" bindtap="openMembers">查看成员</button><button wx:if="{{group.myRole === 'owner'}}" class="button-primary" loading="{{creatingTask}}" disabled="{{creatingTask}}" bindtap="createTask">＋ 新建任务</button></view>
+    <view class="section-title">学习任务</view>
+    <input class="field search-field" placeholder="搜索已加载任务，如 Unit 1、必修一" value="{{query}}" bindinput="onSearch" confirm-type="search"/>
+    <view class="filters"><view wx:for="{{filters}}" wx:key="key" class="filter {{filter === item.key ? 'active' : ''}}" data-key="{{item.key}}" bindtap="selectFilter">{{item.label}}</view></view>
+    <empty-state wx:if="{{!visibleTasks.length}}" title="{{tasks.length ? '没有匹配的任务' : '第一个任务，等你开启'}}" description="{{tasks.length ? '试试更短的关键词或其他分类' : '任务发布后，小组成员就可以开始学习'}}"/>
+    <view wx:for="{{visibleTasks}}" wx:key="_id" class="card task-list-card" data-id="{{item._id}}" bindtap="openTask"><view class="row-between"><view class="card-title">{{item.title}}</view><view class="tag {{item.status === 'withdrawn' ? 'tag-danger' : ''}}">{{item.statusLabel}}</view></view><view class="subtitle">{{item.wordCount}} 个单词 · 截止 {{item.deadlineLabel}}</view><view class="task-foot"><text class="{{item.urgent ? 'urgent' : ''}}">{{item.deadlineHint}}</text><text>查看任务 →</text></view></view>
+    <view class="list-note">当前展示已加载任务；搜索和筛选作用于本页列表。</view>
+  </view>
+</view>

@@ -1,0 +1,2 @@
+.loading{display:flex;align-items:center;justify-content:center;gap:16rpx;padding:80rpx 20rpx;color:#77847e}.dot{width:18rpx;height:18rpx;border-radius:50%;background:#176b4d;animation:pulse 1s infinite alternate}@keyframes pulse{to{opacity:.25;transform:scale(.7)}}
+

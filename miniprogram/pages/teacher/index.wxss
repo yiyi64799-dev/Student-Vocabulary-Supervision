@@ -1,0 +1,2 @@
+@import "../home/index.wxss";
+.preview-banner{padding:22rpx;border:2rpx dashed #bba678;border-radius:20rpx;background:#fff5dc;margin-bottom:24rpx;font-size:24rpx}.teacher-title{font-size:44rpx;font-weight:700;margin:18rpx 0}.teacher-actions{margin-top:24rpx}.teacher-actions button{width:100%;margin:16rpx 0}.form-card .field{margin-top:10rpx}.focus-copy{width:100%}.focus-note{white-space:normal}.task-card .tag{margin-bottom:12rpx}

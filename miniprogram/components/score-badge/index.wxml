@@ -1,0 +1,1 @@
+<view class="badge"><text class="score">{{score}}</text><text class="unit">分</text><text wx:if="{{overdue}}" class="overdue">逾期</text></view>

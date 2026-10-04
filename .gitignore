@@ -1,0 +1,14 @@
+node_modules/
+.pnpm-store/
+dist/
+coverage/
+.test-dist/
+.DS_Store
+*.log
+miniprogram/env.local.ts
+cloudfunctions/**/node_modules/
+project.private.config.json
+
+# Internal planning/source materials are not part of the public code repository.
+Codex_实施指令_*.md
+学生背单词监督微信小程序_V1_产品与技术开发文档.docx

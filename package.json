@@ -1,0 +1,19 @@
+{
+  "name": "student-vocabulary-supervision",
+  "version": "1.0.0",
+  "private": true,
+  "description": "学生背单词监督微信小程序 V1",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build:cloud": "node scripts/build-cloudfunctions.mjs",
+    "test": "node scripts/build-tests.mjs && node --test tests/*.test.mjs",
+    "check": "npm run typecheck && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.25.0",
+    "miniprogram-api-typings": "^4.0.0",
+    "typescript": "^5.7.0",
+    "wx-server-sdk": "^3.0.1"
+  }
+}

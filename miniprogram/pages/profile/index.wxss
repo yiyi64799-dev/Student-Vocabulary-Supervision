@@ -1,0 +1,2 @@
+.profile{align-items:stretch}.avatar-button{background:transparent!important}.avatar-button::after{border:0}.avatar{width:160rpx;height:160rpx;border-radius:50%;background:#e5ece8}
+.profile{padding:42rpx 30rpx}.profile::before{content:'MY SPACE / 我的学习档案';font-size:22rpx;letter-spacing:2rpx;color:#8a997b;text-align:center}.avatar{border:8rpx solid #edf1e3}.profile .field{background:#f4f5ed;border-color:#e5e9dc}.profile .button-primary{margin-top:16rpx;width:100%}

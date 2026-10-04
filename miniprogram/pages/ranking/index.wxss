@@ -1,0 +1,2 @@
+.rank-row{display:grid;grid-template-columns:70rpx 1fr 100rpx;align-items:center}.rank{font-size:40rpx;font-weight:750;color:#176b4d}.score{text-align:right;font-size:42rpx;font-weight:750}.overdue{color:#9c6411}.note{text-align:center;padding:20rpx}
+.rank-row{padding:26rpx 24rpx}.rank{font-family:Georgia,serif;color:#708756}.rank-row:nth-of-type(2){background:#f2ecd7;border-color:#e5d9b2}.person{min-width:0}.person .subtitle{font-size:20rpx;overflow-wrap:anywhere}.score{color:#31553e}.note{font-size:23rpx}

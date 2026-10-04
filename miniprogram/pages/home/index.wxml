@@ -1,0 +1,35 @@
+<view class="page dashboard">
+  <view class="welcome row-between">
+    <view><view class="eyebrow">VOCABULARY / 高中英语</view><view class="greeting">你好，{{nickname}}<text class="greeting-dot">.</text></view></view>
+    <button class="profile-entry" bindtap="openProfile" aria-label="个人资料">我</button>
+  </view>
+  <view class="focus-card">
+    <view class="focus-copy"><view class="focus-kicker">每天一点，积累看得见</view><view class="focus-title">把单词记住，<view>把英语学扎实。</view></view><view class="focus-note">词卡记忆 → 独立默写 → 错词复习</view></view>
+    <view class="book-art" aria-hidden="true"><view class="book-back"></view><view class="book-front"><text>ENGLISH</text><view>Aa</view><text>WORD NOTES</text></view><view class="book-label">一步一步来</view></view>
+    <button wx:if="{{state === 'ready' && recentTasks.length}}" class="focus-button" data-id="{{recentTasks[0]._id}}" bindtap="openLearningTask">{{recentTasks[0].actionLabel}} · {{recentTasks[0].title}} →</button>
+    <button wx:else class="focus-button" bindtap="toggleJoin">用邀请码加入学习小组 →</button>
+  </view>
+  <view class="overview">
+    <view><text class="overview-number">{{state === 'loading' || state === 'error' || tasksError ? '—' : pendingCount}}</text><text>待完成任务</text></view>
+    <view><text class="overview-number">{{state === 'loading' || state === 'error' || tasksError ? '—' : reviewCount}}</text><text>可复习任务</text></view>
+    <view bindtap="openGroups"><text class="overview-number">{{state === 'loading' || state === 'error' ? '—' : groups.length}}</text><text>我的小组 ›</text></view>
+  </view>
+  <view class="quick-actions"><button bindtap="toggleJoin"><text class="quick-icon">＋</text><view><text>加入小组</text><view class="quick-note">和同学一起进步</view></view><text class="chevron">›</text></button><button bindtap="openProfile"><text class="quick-icon warm">▤</text><view><text>教师开通</text><view class="quick-note">使用专用教师开通码</view></view><text class="chevron">›</text></button></view>
+  <view wx:if="{{showJoin}}" class="card stack form-card"><view class="card-title">输入小组邀请码</view><view class="subtitle">向小组创建者获取 6 位邀请码</view><input class="field code" placeholder="例如 ABC234" maxlength="6" value="{{inviteCode}}" bindinput="onInviteCode"/><button class="button-primary" loading="{{joining}}" disabled="{{joining}}" bindtap="joinGroup">加入小组</button></view>
+  <view class="row-between section-title"><text>我的学习</text><text class="section-note">专注每一次进步</text></view>
+  <view class="study-tabs"><view wx:for="{{tabs}}" wx:key="key" class="study-tab {{selectedTab === item.key ? 'selected' : ''}}" data-key="{{item.key}}" bindtap="selectTab">{{item.label}}</view></view>
+  <loading-state wx:if="{{state === 'loading'}}" text="正在整理你的学习任务…"/>
+  <view wx:elif="{{state === 'error'}}" class="connection-card"><view class="connection-symbol">↻</view><view class="card-title">暂时没能获取学习数据</view><view class="subtitle">请检查网络后重试；首次使用时需完成云服务接入。</view><button class="button-secondary" bindtap="load">重新加载</button></view>
+  <view wx:else>
+    <view wx:if="{{tasksError}}" class="partial-error" bindtap="load">部分学习任务未加载，点击重试 ›</view>
+    <empty-state wx:if="{{!visibleTasks.length}}" title="{{selectedTab === 'review' ? '暂无可复习的错词任务' : selectedTab === 'learning' ? '还没有进行中的学习' : '当前没有待完成任务'}}" description="{{selectedTab === 'review' ? '正式默写后，答错的单词会出现在这里' : '加入小组后，在这里领取并继续学习任务'}}"/>
+    <view wx:for="{{visibleTasks}}" wx:key="_id" class="card task-card" data-id="{{item._id}}" bindtap="openLearningTask"><view class="task-top"><text class="task-source">{{item.groupName}}</text><text wx:if="{{item.urgent && item.stage !== 'submitted'}}" class="deadline-badge">{{item.deadlineHint}}</text><text wx:elif="{{item.stage === 'submitted'}}" class="tag">错词 {{item.wrongCount}} 个</text></view><view class="task-title">{{item.title}}</view><view class="task-detail">{{item.wordCount}} 个单词 · 截止 {{item.deadlineLabel}}</view><view class="task-bottom"><view class="task-progress"><view class="progress-track"><view class="progress-fill" style="width: {{item.progressPercent}}%"></view></view><text>记忆 {{item.progressPercent}}%</text></view><text class="task-action">{{item.actionLabel}} →</text></view></view>
+  </view>
+  <view class="row-between section-title"><text>我的小组</text><text class="more" bindtap="openGroups">查看全部 ›</text></view>
+  <view wx:if="{{state === 'ready'}}"><view wx:for="{{groups}}" wx:key="_id" class="card group-card" data-id="{{item._id}}" bindtap="openGroup"><view class="group-icon">Aa</view><view class="group-copy"><view class="card-title">{{item.name}}</view><view class="subtitle">{{item.memberCount}} 位学习成员 · {{item.role === 'owner' ? '我管理的小组' : '我加入的小组'}}</view></view><text class="chevron">›</text></view></view>
+  <view wx:elif="{{state === 'empty'}}" class="small-empty">还没有小组，向老师获取邀请码后即可加入。</view>
+  <view wx:else class="small-empty">{{state === 'loading' ? '正在加载小组…' : '连接恢复后，小组会显示在这里。'}}</view>
+  <view class="method-card" bindtap="showStudyGuide"><view class="method-head"><text class="method-kicker">LEARNING NOTES</text><text>↗</text></view><view class="method-title">背过，不等于记住。</view><view class="method-copy">试着遮住释义主动回想，再用默写找到薄弱点。</view><view class="method-link">查看高中英语学习建议 →</view></view>
+  <view class="footer-note">认真记住的每一个词，都算数。</view>
+  <view class="safe-bottom"></view>
+</view>

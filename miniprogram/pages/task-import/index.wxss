@@ -1,0 +1,1 @@
+.paste{box-sizing:border-box;width:100%;min-height:300rpx;margin:24rpx 0;padding:20rpx;background:#f7f9f8;border:2rpx solid #e1e7e4;border-radius:16rpx}.issue{padding:18rpx 0;border-bottom:2rpx solid #edf1ef;color:#b63b30}.raw{display:block;margin-top:6rpx;color:#78857f}.remove{color:#b63b30}

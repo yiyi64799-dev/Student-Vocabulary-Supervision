@@ -1,0 +1,1 @@
+<view class="track"><view class="fill" style="width: {{value}}%"></view></view>

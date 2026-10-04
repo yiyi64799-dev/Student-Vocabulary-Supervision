@@ -1,0 +1,30 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/teacher/index",
+    "pages/student-preview/index",
+    "pages/groups/index",
+    "pages/group-detail/index",
+    "pages/group-members/index",
+    "pages/task-edit/index",
+    "pages/task-import/index",
+    "pages/task-owner-detail/index",
+    "pages/member-task-detail/index",
+    "pages/study/index",
+    "pages/dictation/index",
+    "pages/result/index",
+    "pages/wrong-practice/index",
+    "pages/ranking/index",
+    "pages/profile/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "单词监督",
+    "navigationBarBackgroundColor": "#f6f5f1",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f5f1",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}
